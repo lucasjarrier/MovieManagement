@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Table(schema = "treinamento")
-public class Movie {
+public class Filme {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "id_diretor", referencedColumnName = "id")
-    private Director diretor;
+    private Diretor diretor;
 
 }

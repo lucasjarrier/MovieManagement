@@ -1,8 +1,8 @@
 package gt.treinamento.backend.services;
 
-import gt.treinamento.backend.DTO.UserUpdatesDTO;
+import gt.treinamento.backend.DTO.UsuarioAtualizacoesDTO;
 import gt.treinamento.backend.models.Usuario;
-import gt.treinamento.backend.repositories.UserRepository;
+import gt.treinamento.backend.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.validation.Valid;
@@ -10,24 +10,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UsuarioService {
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     public Usuario save(@Valid Usuario usuario) {
-        return userRepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
 
-    public Usuario update(UserUpdatesDTO updates, Long id) {
+    public Usuario update(UsuarioAtualizacoesDTO updates, Long id) {
 
-        if(userRepository.findById(id).isPresent()) {
+        if(usuarioRepository.findById(id).isPresent()) {
 
-            Usuario usuario = userRepository.findById(id).get();
+            Usuario usuario = usuarioRepository.findById(id).get();
 
             if(updates.getDataNascimento() != null) {
                 usuario.setDataNascimento(updates.getDataNascimento());
@@ -41,20 +41,20 @@ public class UserService {
             if(updates.getSobrenome() != null) {
                 usuario.setSobrenome(updates.getSobrenome());
             }
-            return userRepository.save(usuario);
+            return usuarioRepository.save(usuario);
         }
         return null;
     }
 
     public List<Usuario> findAll() {
-        return userRepository.findAll();
+        return usuarioRepository.findAll();
     }
 
     public Usuario findById(Long id) {
-        return userRepository.findById(id).get();
+        return usuarioRepository.findById(id).get();
     }
 
     public void delete(Long id){
-        userRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 }

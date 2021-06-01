@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class UserUpdatesDTO {
+public class UsuarioAtualizacoesDTO {
 
     private String nome;
     private String sobrenome;

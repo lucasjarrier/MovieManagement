@@ -39,6 +39,6 @@ public class Usuario {
     private String email;
 
     @Transient
-    private List<Movie> filmes;
+    private List<Filme> filmes;
 
 }
