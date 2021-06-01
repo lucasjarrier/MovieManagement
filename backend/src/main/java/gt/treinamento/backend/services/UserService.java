@@ -1,48 +1,57 @@
 package gt.treinamento.backend.services;
 
 import gt.treinamento.backend.DTO.UserUpdatesDTO;
-import gt.treinamento.backend.models.User;
+import gt.treinamento.backend.models.Usuario;
 import gt.treinamento.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.validation.Valid;
 
 import java.util.List;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User update(UserUpdatesDTO updates, Long id) {
+    public Usuario save(@Valid Usuario usuario) {
+        return userRepository.save(usuario);
+    }
+
+    public Usuario update(UserUpdatesDTO updates, Long id) {
 
         if(userRepository.findById(id).isPresent()) {
 
-            User user = userRepository.findById(id).get();
+            Usuario usuario = userRepository.findById(id).get();
 
-            if(updates.getBirthday() != null) {
-                user.setBirthday(updates.getBirthday());
+            if(updates.getDataNascimento() != null) {
+                usuario.setDataNascimento(updates.getDataNascimento());
             }
-            if(updates.getGender() != null) {
-                user.setGender(updates.getGender());
+            if(updates.getSexo() != null) {
+                usuario.setSexo(updates.getSexo());
             }
-            if(updates.getName() != null) {
-                user.setName(updates.getName());
+            if(updates.getNome() != null) {
+                usuario.setNome(updates.getNome());
             }
-            if(updates.getLastName() != null) {
-                user.setLastName(updates.getLastName());
+            if(updates.getSobrenome() != null) {
+                usuario.setSobrenome(updates.getSobrenome());
             }
-            return userRepository.save(user);
+            return userRepository.save(usuario);
         }
         return null;
     }
 
-    public List<User> findAll() {
+    public List<Usuario> findAll() {
         return userRepository.findAll();
+    }
+
+    public Usuario findById(Long id) {
+        return userRepository.findById(id).get();
     }
 
     public void delete(Long id){

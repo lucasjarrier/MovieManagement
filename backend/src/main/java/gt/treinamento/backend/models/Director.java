@@ -11,19 +11,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(schema = "chefs", name="director")
+@Table(schema = "treinamento")
 public class Director {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "diretor_id_seq")
+    @SequenceGenerator(name = "diretor_id_seq", sequenceName = "diretor_id_seq")
     private Long id;
 
     @NotNull
-    @Column(name="name")
-    private String name;
+    @Column(name="nome")
+    private String nome;
 
     @NotNull
-    @Column(name="lastName")
-    private String lastName;
+    @Column(name="sobrenome")
+    private String sobrenome;
 
 }

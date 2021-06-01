@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(schema = "treinamento", name = "movie")
+@Table(schema = "treinamento")
 public class Movie {
 
     @Id
@@ -19,15 +19,16 @@ public class Movie {
     private Long id;
 
     @Column
-    private String name;
+    private String nome;
 
     @Column
-    private String genderMovie;
+    private String genero;
 
     @Column
-    private Date launchDate;
+    private Date lancamento;
 
-    @Column
-    private Director director;
+    @ManyToOne
+    @JoinColumn(name = "id_diretor", referencedColumnName = "id")
+    private Director diretor;
 
 }

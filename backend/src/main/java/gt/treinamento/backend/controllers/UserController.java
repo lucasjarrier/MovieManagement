@@ -1,7 +1,7 @@
 package gt.treinamento.backend.controllers;
 
 import gt.treinamento.backend.DTO.UserUpdatesDTO;
-import gt.treinamento.backend.models.User;
+import gt.treinamento.backend.models.Usuario;
 import gt.treinamento.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,17 +22,22 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(User user) {
-        return new ResponseEntity(service.save(user), HttpStatus.CREATED);
+    public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
+        return new ResponseEntity(service.save(usuario), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<Usuario>> findAll() {
         return new ResponseEntity(service.findAll(), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> findById(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity(service.findById(id), HttpStatus.ACCEPTED);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable(value = "id") Long id, UserUpdatesDTO updates) {
+    public ResponseEntity<Usuario> update(@PathVariable(value = "id") Long id, @RequestBody UserUpdatesDTO updates) {
         return new ResponseEntity(service.update(updates, id), HttpStatus.ACCEPTED);
     }
 

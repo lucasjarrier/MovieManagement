@@ -1,6 +1,6 @@
 DROP IF EXISTS SCHEMA treinamento;
 
-CREATE SCHEMA treinamento;
+CREATE SCHEMA treinamento AUTHORIZATION postgres;
 
 CREATE TABLE treinamento.usuario (
 	id SERIAL PRIMARY KEY,

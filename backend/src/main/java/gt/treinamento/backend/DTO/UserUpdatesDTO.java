@@ -9,9 +9,9 @@ import java.util.Date;
 @Setter
 public class UserUpdatesDTO {
 
-    private String name;
-    private String lastName;
-    private String Gender;
-    private Date birthday;
+    private String nome;
+    private String sobrenome;
+    private String sexo;
+    private Date dataNascimento;
 
 }
