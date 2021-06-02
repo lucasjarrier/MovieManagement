@@ -1,5 +1,6 @@
 package gt.treinamento.backend.models;
 
+import gt.treinamento.backend.enums.Genero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class Filme {
     private String nome;
 
     @Column
-    private String genero;
+    private Genero genero;
 
     @Column
     private Date lancamento;
