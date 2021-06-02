@@ -31,17 +31,17 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Filme> listarFilmePorID(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Filme> listarFilmePorID(@PathVariable Long id) {
         return new ResponseEntity(service.procurarPorId(id),HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Filme> atualizarFilme(@PathVariable(value = "id") Long id, @RequestBody Filme filme) {
+    public ResponseEntity<Filme> atualizarFilme(@PathVariable Long id, @RequestBody Filme filme) {
         return new ResponseEntity(service.atualizarFilme(id,filme),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarFilme(@PathVariable(value = "id") Long id) {
+    public ResponseEntity deletarFilme(@PathVariable Long id) {
         service.deletarFilme(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);}
 }

@@ -31,17 +31,17 @@ public class DiretorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Diretor> atualizarDadosDiretor(@PathVariable(value = "id") Long id, @RequestBody Diretor diretor) {
+    public ResponseEntity<Diretor> atualizarDadosDiretor(@PathVariable Long id, @RequestBody Diretor diretor) {
         return new ResponseEntity(service.alterarDados(id,diretor), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Diretor> encontrarDiretorPorID(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Diretor> encontrarDiretorPorID(@PathVariable Long id) {
         return new ResponseEntity(service.acharPorID(id),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Diretor> deletarDiretorPorID(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Diretor> deletarDiretorPorID(@PathVariable Long id) {
         service.deletarPorID(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

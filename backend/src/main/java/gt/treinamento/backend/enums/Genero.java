@@ -5,16 +5,16 @@ import lombok.Getter;
 @Getter
 public enum Genero {
 
-    Indefinido("Não Especificado"),
-    Infantil("Infantil"),
-    Ficcao("Ficção"),
-    Acao("Ação"),
-    Romance("Romance"),
-    Drama("Drama"),
-    Comedia("Comédia"),
-    Terror("Terror"),
-    Guerra("Guerra"),
-    Aventura("Aventura");
+    INDEFINIDO("Não Especificado"),
+    INFANTIL("Infantil"),
+    FICCAO("Ficção"),
+    ACAO("Ação"),
+    ROMANCE("Romance"),
+    DRAMA("Drama"),
+    COMEDIA("Comédia"),
+    TERROR("Terror"),
+    GUERRA("Guerra"),
+    AVENTURA("Aventura");
 
     private String state;
 
