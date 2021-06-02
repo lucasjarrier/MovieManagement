@@ -1,5 +1,6 @@
 package gt.treinamento.backend.models;
 
+import gt.treinamento.backend.enums.Sexo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class Usuario {
     private String sobrenome;
 
     @Column(name = "sexo")
-    private String sexo;
+    private Sexo sexo;
 
     @Column(name = "data_nascimento")
     private Date dataNascimento;
