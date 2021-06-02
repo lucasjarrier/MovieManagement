@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public enum Sexo {
 
-    Masculino("Masculino"),
-    Feminino("Feminino"),
-    NãoInformado("Não Declarado");
+    MASCULINO("Masculino"),
+    FEMININO("Feminino"),
+    NAO_INFORMADO("Não Declarado");
 
     private String state;
 
