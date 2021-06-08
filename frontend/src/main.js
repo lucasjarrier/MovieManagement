@@ -1,11 +1,12 @@
 import Vue from 'vue'
-import App from './App.vue'
+import Home from './Home.vue'
 import Element from 'element-ui'
+import router from './routes'
 
-    
 Vue.config.productionTip = false
 Vue.use(Element)
     
-new Vue ({
-    render: h => h(App),
-}).$mount('#app')
+export default new Vue({
+    router,
+    render: h => h(Home),
+  }).$mount('#app')
