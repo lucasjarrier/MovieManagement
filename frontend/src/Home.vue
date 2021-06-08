@@ -1,0 +1,26 @@
+<template lang="pug">
+  div
+    Navbar
+    .container
+      router-view
+</template>
+
+<script>
+import Navbar from './components/Navbar.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    Navbar
+  }
+}
+</script>
+
+<style>
+
+.container {
+    margin-top: 60px;
+    padding: 0 60px;
+}
+
+</style>
