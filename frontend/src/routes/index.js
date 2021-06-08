@@ -7,10 +7,11 @@ import CadastroFilme from '@/components/CadastroFilme.vue'
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
+    routes: [
+    
     {
       name: "CadastroUsuario",
-      path: "/CadastroUsuario",
+      path: "/",
       component: CadastroUsuario,
     },
     {

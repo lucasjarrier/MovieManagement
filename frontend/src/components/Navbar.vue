@@ -9,7 +9,7 @@
       active-text-color="#000"
       router
       @select="handleSelect")
-      el-menu-item(index="CadastroUsuario") Usuário
+      el-menu-item(index="/") Usuário
       el-menu-item(index="CadastroDiretor") Diretor
       el-menu-item(index="CadastroFilme") Filme
 </template>
@@ -19,7 +19,7 @@ export default {
   name: 'Navbar',
   data() {
       return {
-        activeIndex: 'CadastroUsuario',
+        activeIndex: '/',
       };
     },
     methods: {
