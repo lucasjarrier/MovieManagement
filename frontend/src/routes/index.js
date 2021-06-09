@@ -8,10 +8,15 @@ Vue.use(Router)
 
 const router = new Router({
     routes: [
+      {
+        name: "CadastroUsuario",
+        path: "/",
+        component: CadastroUsuario,
+      },
     
     {
       name: "CadastroUsuario",
-      path: "/",
+      path: "/CadastroUsuario",
       component: CadastroUsuario,
     },
     {
