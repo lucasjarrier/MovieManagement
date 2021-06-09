@@ -1,7 +1,7 @@
-import { http } from "./config";
+import http from "./config";
 
 export default {
   salvarUsuario: (usuario) => {
-    return http.post("/usuario", { usuario });
+    return http().post("/usuario", { ...usuario });
   },
 };

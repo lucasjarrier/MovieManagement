@@ -16,13 +16,13 @@
             el-input(placeholder="Digite o email" v-model="usuario.email").custom-input()
           el-row
             h3 Sexo
-            el-select(v-model="usuario.value" placeholder="Selecione o sexo")
-              el-option(value='masculino' label="Masculino")
-              el-option(value='feminino' label="Feminino")
-              el-option(value='naoEspecificado' label="Não especificado")
+            el-select(v-model="usuario.sexo" placeholder="Selecione o sexo")
+              el-option(value='MASCULINO' label="Masculino")
+              el-option(value='FEMININO' label="Feminino")
+              el-option(value='NAO_INFORMADO' label="Não especificado")
           el-row
             h3 Data de nascimento
-            el-date-picker(v-model="usuario.nascimento" type="date" placeholder="Selecione a data")
+            el-date-picker(v-model="usuario.dataNascimento" type="date" placeholder="Selecione a data")
           el-row.spacing()
             el-button(type="primary" @click="salvarUsuario").custom-button
               span Criar Usuário
@@ -42,9 +42,8 @@ export default {
         nome: '',
         sobrenome: '',
         sexo: '',
-        nascimento: '',
-        email: '',
-        value: ''
+        dataNascimento: '',
+        email: ''
       }
     }
   },

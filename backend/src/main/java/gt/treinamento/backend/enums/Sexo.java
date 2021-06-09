@@ -14,4 +14,7 @@ public enum Sexo {
     Sexo(String state) {
         this.state = state;
     }
+
+
+
 }
