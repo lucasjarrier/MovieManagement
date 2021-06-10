@@ -36,9 +36,9 @@ public class UsuarioController {
         return new ResponseEntity(service.findById(id), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioAtualizacoesDTO updates) {
-        return new ResponseEntity(service.update(updates, id), HttpStatus.ACCEPTED);
+    @PutMapping
+    public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario) {
+        return new ResponseEntity(service.salvar(usuario), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")

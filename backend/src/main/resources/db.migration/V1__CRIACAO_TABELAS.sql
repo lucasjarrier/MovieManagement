@@ -4,22 +4,22 @@ CREATE SCHEMA treinamento AUTHORIZATION postgres;
 
 CREATE TABLE treinamento.usuario (
 	id SERIAL PRIMARY KEY,
-	nome VARCHAR(20) NOT NULL,
+	nome VARCHAR(100) NOT NULL,
 	sobrenome VARCHAR(100),
 	sexo VARCHAR(20) NOT NULL,
 	data_nascimento TIMESTAMP NOT NULL,
-	email VARCHAR(20) NOT NULL
+	email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE treinamento.diretor (
 	id SERIAL PRIMARY KEY,
-	nome VARCHAR(30) NOT NULL,
+	nome VARCHAR(100) NOT NULL,
 	sobrenome VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE treinamento.filme (
 	id SERIAL PRIMARY KEY,
-	nome VARCHAR(30) NOT NULL,
+	nome VARCHAR(100) NOT NULL,
 	genero VARCHAR(20) NOT NULL,
 	lancamento TIMESTAMP NOT NULL,
 	id_diretor INTEGER NOT NULL,
