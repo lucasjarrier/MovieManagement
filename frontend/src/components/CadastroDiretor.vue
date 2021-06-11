@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+div
   .container
     .container-cadastro
       h1 Cadastro de Diretor
