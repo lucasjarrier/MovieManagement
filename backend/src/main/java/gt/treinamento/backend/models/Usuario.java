@@ -39,7 +39,11 @@ public class Usuario {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Transient
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(schema = "treinamento", name = "rel_usuario_filme",
+            joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_filme", referencedColumnName = "id"))
     private List<Filme> filmes;
 
 }
+
