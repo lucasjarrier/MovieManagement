@@ -51,8 +51,7 @@ export default {
             this.resposta = resposta;
             this.listarDiretores();
           });  
-        } 
-        else {
+        } else {
           Diretor.atualizarDiretor(this.diretor).then((resposta) => {
             alert("Diretor atualizado!");
             this.resposta = resposta;
