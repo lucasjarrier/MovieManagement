@@ -61,8 +61,7 @@ div
           el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
       el-col.offset
         el-button.custom-button2(@click="salvarFilme(id_filme)" type="text") Adicionar Filme
-        
-
+        el-button(@click="listarGalera()" type="primary")
 </template>
 
 <script>
@@ -79,7 +78,8 @@ export default {
         sobrenome: "",
         sexo: "",
         dataNascimento: "",
-        email: ""
+        email: "",
+        filmes: []
       },
       tableData: [],
       filmes: [],
@@ -132,6 +132,9 @@ export default {
     },
     manterUsuario(usuario) {
       this.id_usuario = usuario.id
+    },
+    listarGalera() {
+      console.log(this.tableData)
     }
   },
   mounted() {
