@@ -1,5 +1,6 @@
 package gt.treinamento.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gt.treinamento.backend.enums.Genero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +29,10 @@ public class Filme {
 
     @Column
     private Date lancamento;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "filmes", cascade = CascadeType.MERGE)
+    private List<Usuario> usuarios;
 
     @ManyToOne
     @JoinColumn(name = "id_diretor", referencedColumnName = "id")

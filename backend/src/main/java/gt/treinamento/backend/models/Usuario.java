@@ -4,6 +4,8 @@ import gt.treinamento.backend.enums.Sexo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -39,7 +41,12 @@ public class Usuario {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Transient
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}   )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinTable(schema = "treinamento", name = "rel_usuario_filme",
+            joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_filme", referencedColumnName = "id"))
     private List<Filme> filmes;
 
 }
+

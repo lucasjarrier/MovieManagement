@@ -47,18 +47,20 @@ div
             el-table-column( prop="email" label="E-mail" width="200")
             el-table-column( prop="sexo" label="Sexo" width="150")
             el-table-column( prop="dataNascimento" label="Data de Nascimento" width="250")
-            el-table-column( prop="id_filme" label="Filmes" width="200")
+            el-table-column( prop="filmes" label="Filmes" width="200")
             el-table-column( label="Ações" width="300")
               template(slot-scope="scope")
                 el-button(@click="atualizarUsuario(tableData[scope.$index])" type="text").custom-button2 Editar
                 el-button(@click="removerUsuario(tableData[scope.$index])" type="text").custom-button2 Excluir
-                el-button(v-model='index = scope.$index' @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
-  el-dialog.custom-modal(:visible.sync="dialogTableVisible" width="50%" close-on-press-escape)
+                el-button(v-on:click="manterUsuario(tableData[scope.$index])" @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
+  el-dialog(:visible.sync="dialogTableVisible" width="40%" close-on-press-escape)
     h3 Escolha um filme
-      span.custom-span  *
-    el-select(placeholder="Filmes", v-model="usuario.id_filme", clearable)
-      el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
-    el-button(@click="" type="text").custom-button2 Adicionar Filme
+    el-row
+      el-col
+        el-select(placeholder="Filmes", v-model="id_filme", clearable)
+          el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
+      el-col.offset
+        el-button.custom-button2(@click="salvarFilme(id_filme)" type="text") Adicionar Filme
         
 
 </template>
@@ -77,11 +79,12 @@ export default {
         sobrenome: "",
         sexo: "",
         dataNascimento: "",
-        email: "",
-        id_filme: ""
+        email: ""
       },
       tableData: [],
       filmes: [],
+      id_filme: "",
+      id_usuario: "",
       dialogTableVisible: false
     };
   },
@@ -119,6 +122,16 @@ export default {
       Filme.retornarFilmes().then((resposta => {
         this.filmes = resposta.data
       }))
+    },
+    salvarFilme(id_filme) {
+      Usuario.salvarFilme(this.id_usuario,id_filme).then(() => {
+        alert("Filme cadastrado ao Usuário!");
+        this.dialogTableVisible = false;
+        this.listarUsuarios();
+      })
+    },
+    manterUsuario(usuario) {
+      this.id_usuario = usuario.id
     }
   },
   mounted() {
@@ -155,8 +168,8 @@ i {
   font-size: small;
 }
 
-.custom-modal{
-  color:blueviolet;
+.offset {
+  padding-top: 40px;
 }
 
 .custom-button {
@@ -168,6 +181,7 @@ i {
 }
 
 .custom-button2 {
+  padding: 5px;
   border-color: black;
   background-color: blueviolet;
   color: rgb(243, 236, 236);
@@ -188,6 +202,11 @@ i {
   border-radius: 20px;
   border-style: solid;
   border-color: rgb(202, 176, 226);
+}
+
+.custom-spacing {
+  padding-right: 50%;
+
 }
 
 .container-tabela {
