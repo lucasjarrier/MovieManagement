@@ -52,7 +52,7 @@ div
               template(slot-scope="scope")
                 el-button(@click="atualizarUsuario(tableData[scope.$index])" type="text").custom-button2 Editar
                 el-button(@click="removerUsuario(tableData[scope.$index])" type="text").custom-button2 Excluir
-                el-button(v-model='index = scope.$index' @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
+                el-button(v-on:click="manterUsuario(tableData[scope.$index])" @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
   el-dialog(:visible.sync="dialogTableVisible" width="40%" close-on-press-escape)
     h3 Escolha um filme
     el-row
@@ -60,7 +60,7 @@ div
         el-select(placeholder="Filmes", v-model="id_filme", clearable)
           el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
       el-col.offset
-        el-button.custom-button2(@click="" type="text") Adicionar Filme
+        el-button.custom-button2(@click="salvarFilme(id_filme)" type="text") Adicionar Filme
         
 
 </template>
@@ -84,6 +84,7 @@ export default {
       tableData: [],
       filmes: [],
       id_filme: "",
+      id_usuario: "",
       dialogTableVisible: false
     };
   },
@@ -122,8 +123,15 @@ export default {
         this.filmes = resposta.data
       }))
     },
-    adicionarFilme() {
-
+    salvarFilme(id_filme) {
+      Usuario.salvarFilme(this.id_usuario,id_filme).then(() => {
+        alert("Filme cadastrado ao Usuário!");
+        this.dialogTableVisible = false;
+        this.listarUsuarios();
+      })
+    },
+    manterUsuario(usuario) {
+      this.id_usuario = usuario.id
     }
   },
   mounted() {

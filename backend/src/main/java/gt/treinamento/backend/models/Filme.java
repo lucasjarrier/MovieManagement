@@ -31,7 +31,7 @@ public class Filme {
     private Date lancamento;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "filmes", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(mappedBy = "filmes", cascade = CascadeType.MERGE)
     private List<Usuario> usuarios;
 
     @ManyToOne
