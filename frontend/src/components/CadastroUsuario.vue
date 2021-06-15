@@ -40,38 +40,34 @@ div
       .container-tabela
         h2 Tabela de Usuários
         el-row
-          el-col
-            el-table.custom-table(:data="tableData" empty-text='Não existem usuários cadastrados!')
-              el-table-column(fixed prop="id" label="Id" width="100")
-              el-table-column(fixed prop="nome" label="Nome" width="120")
-              el-table-column(fixed prop="sobrenome" label="Sobrenome" width="250")
-              el-table-column(fixed prop="email" label="E-mail" width="250")
-              el-table-column(fixed prop="sexo" label="Sexo" width="250")
-              el-table-column(fixed prop="dataNascimento" label="Data de Nascimento" width="250")
-              el-table-column(fixed label="Ações" width="150")
-                template(slot-scope="scope")
-                  el-button(@click="atualizarUsuario(tableData[scope.$index])" type="text").custom-button2 Editar
-                  el-button(@click="removerUsuario(tableData[scope.$index])" type="text").custom-button2 Excluir
-      .container-tabela
-        el-form
-          el-row
-            el-col(:span = "24")
-              h2 Adicionar Filme ao Usuário
-            el-row
-              el-col.offset(:xs= "24" :md = "12")
-                h3 Email do usuário
-                 span.custom-span  *
-                el-input.custom-input(placeholder="Email do Usuário", v-model="usuario.nome", clearable)
-              el-col.offset(:xs= "24" :md = "12")
-                h3 ID do filme
-                 span.custom-span  *
-                el-input.custom-input(placeholder="ID do filme", v-model="usuario.nome", clearable)
+          el-table(:data="tableData" empty-text='Não existem usuários cadastrados!')
+            el-table-column( prop="id" label="Id" width="80")
+            el-table-column( prop="nome" label="Nome" width="120")
+            el-table-column( prop="sobrenome" label="Sobrenome" width="250")
+            el-table-column( prop="email" label="E-mail" width="200")
+            el-table-column( prop="sexo" label="Sexo" width="150")
+            el-table-column( prop="dataNascimento" label="Data de Nascimento" width="250")
+            el-table-column( prop="filmes" label="Filmes" width="200")
+            el-table-column( label="Ações" width="300")
+              template(slot-scope="scope")
+                el-button(@click="atualizarUsuario(tableData[scope.$index])" type="text").custom-button2 Editar
+                el-button(@click="removerUsuario(tableData[scope.$index])" type="text").custom-button2 Excluir
+                el-button(v-on:click="manterUsuario(tableData[scope.$index])" @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
+  el-dialog(:visible.sync="dialogTableVisible" width="40%" close-on-press-escape)
+    h3 Escolha um filme
+    el-row
+      el-col
+        el-select(placeholder="Filmes", v-model="id_filme", clearable)
+          el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
+      el-col.offset
+        el-button.custom-button2(@click="salvarFilme(id_filme)" type="text") Adicionar Filme
         
 
 </template>
 
 <script>
 import Usuario from "../services/usuarioService";
+import Filme from "../services/filmeService";
 
 export default {
   name: "CadastroUsuario",
@@ -83,9 +79,13 @@ export default {
         sobrenome: "",
         sexo: "",
         dataNascimento: "",
-        email: "",
+        email: ""
       },
       tableData: [],
+      filmes: [],
+      id_filme: "",
+      id_usuario: "",
+      dialogTableVisible: false
     };
   },
   methods: {
@@ -117,10 +117,26 @@ export default {
         this.resposta = resposta;
         this.listarUsuarios();
       })
+    },
+    listarFilmes() {
+      Filme.retornarFilmes().then((resposta => {
+        this.filmes = resposta.data
+      }))
+    },
+    salvarFilme(id_filme) {
+      Usuario.salvarFilme(this.id_usuario,id_filme).then(() => {
+        alert("Filme cadastrado ao Usuário!");
+        this.dialogTableVisible = false;
+        this.listarUsuarios();
+      })
+    },
+    manterUsuario(usuario) {
+      this.id_usuario = usuario.id
     }
   },
   mounted() {
-    this.listarUsuarios();
+    this.listarUsuarios(),
+    this.listarFilmes()
   },
 };
 </script>
@@ -152,6 +168,10 @@ i {
   font-size: small;
 }
 
+.offset {
+  padding-top: 40px;
+}
+
 .custom-button {
   border-color: black;
   background-color: blueviolet;
@@ -160,16 +180,14 @@ i {
   font-size: 15px;
 }
 
-.custom-table {
-  width: 100%;
-}
-
 .custom-button2 {
+  padding: 5px;
   border-color: black;
   background-color: blueviolet;
   color: rgb(243, 236, 236);
   font-family: monospace;
 }
+
 
 .custom-button2:hover {
   background-color: rgb(157, 88, 221);
@@ -186,9 +204,18 @@ i {
   border-color: rgb(202, 176, 226);
 }
 
+.custom-spacing {
+  padding-right: 50%;
+
+}
+
 .container-tabela {
   padding-top: 50px;
   padding-bottom: 50px;
+}
+
+.modal-input{
+  padding-bottom: 20px;
 }
 
 .custom-input {

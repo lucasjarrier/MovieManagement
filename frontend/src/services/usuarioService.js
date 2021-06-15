@@ -12,5 +12,8 @@ export default {
   },
   deletarUsuario: (id) => {
     return http().delete(`/usuario/${id}`);
+  },
+  salvarFilme: (id_user, id_filme) => {
+    return http().post(`/usuario/${id_user}/${id_filme}`);
   }
 };
