@@ -5,7 +5,7 @@ export default {
         return http().post("/filme", {...filme});
     },
     retornarFilme: () => {
-        return http().get("/filme");
+        return http().get("/filmes");
     },
     atualizarFilme: (filme) => {
         return http().put("/filme", {...filme});
