@@ -7,11 +7,11 @@ div
         el-col
           el-form.custom-form
             el-row
-              h3 Nome do diretor:
-              el-input.custom-input(placeholder="Fulano...", v-model="diretor.nome", clearable)
+              h3 Nome do diretor
+              el-input.custom-input(placeholder="Nome", v-model="diretor.nome", clearable)
             el-row
-              h3 Sobrenome do diretor:
-              el-input.custom-input(placeholder="...da Silva", v-model="diretor.sobrenome", clearable)
+              h3 Sobrenome do diretor
+              el-input.custom-input(placeholder="Sobrenome", v-model="diretor.sobrenome", clearable)
             el-row.spacing
               el-button.custom-button(type="round", @click="salvarDiretor")
                 span Salvar Diretor
@@ -20,13 +20,14 @@ div
         h2 Tabela de Diretores
         el-row
           el-col
-            el-table.custom-table(:data="tableData" empty-text='Não existem diretores cadastrados!')
+            el-table.custom-table(:data="diretores" empty-text='Não existem diretores cadastrados!')
               el-table-column(prop="id" label="Id" width="100")
               el-table-column(prop="nome" label="Nome" width="120")
-              el-table-column(prop="sobrenome" label="Sobrenome" width="100")
+              el-table-column(prop="sobrenome" label="Sobrenome" width="200")
+              el-table-column(label="Ações")
                 template(slot-scope="scope")
-                  el-button(@click="atualizarDiretor(tableData[scope.$index])" type="text").custom-button2 Editar
-                  el-button(@click="removerDiretor(tableData[scope.$index])" type="text").custom-button2 Excluir
+                  el-button(@click="atualizarDiretor(diretores[scope.$index])" type="text").custom-button2 Editar
+                  el-button(@click="removerDiretor(diretores[scope.$index])" type="text").custom-button2 Excluir
 </template>
 
 <script>
@@ -37,10 +38,11 @@ export default {
     data() {
       return {
         diretor: {
+          id: "",
           nome: '',
           sobrenome: ''
         },
-        tableData: []        
+        diretores: []        
       };
     },
     methods: {
@@ -61,7 +63,7 @@ export default {
       },
       listarDiretores() {
         Diretor.retornarDiretores().then((resposta) => {
-          this.tableData = resposta.data;
+          this.diretores = resposta.data;
         });
       },
       atualizarDiretor(diretor) {
@@ -115,11 +117,13 @@ i {
 }
 
 .custom-button2 {
+  padding: 5px;
   border-color: black;
   background-color: blueviolet;
   color: rgb(243, 236, 236);
   font-family: monospace;
 }
+
 
 .custom-button2:hover {
   background-color: rgb(157, 88, 221);

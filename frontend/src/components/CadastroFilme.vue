@@ -4,69 +4,62 @@ div
     .container-cadastro 
       h1 Cadastro de Filmes
       el-row
-        el-cow
+        el-col
           el-form
             el-row
-              h3 Nome do filme:
-              el-input(placeholder="Digite o nome do filme" v-model="nomeFilme").custom-input()
+              h3 Nome do filme
+              el-input(placeholder="Digite o nome do filme" v-model="filme.nome").custom-input()
             el-row
-              h3 Gênero do filme:
-              el-select(placeholder="Selecione o gênero do filme" v-model="generoFilme")
-                el-option(value='terror' label="Terror")
-                el-option(value='drama' label="Drama")
-                el-option(value='fantasia' label="Fantasia")
+              h3 Gênero do filme
+              el-select(v-model="filme.genero" placeholder="Selecione o gênero do filme") 
+                el-option(value="TERROR")
+                el-option(value="DRAMA")
             el-row
-              h3 Data de lançamento:
-              el-date-picker(placeholder="Selecione uma data" v-model="lancamento").custom-input()
+              h3 Data de lançamento
+              el-date-picker(placeholder="Selecione uma data" v-model="filme.lancamento").custom-input()
+            el-row
+              h3 Diretor do Filme
+              el-select(placeholder="Selecione o Diretor" v-model="filme.diretor.id")
+                el-option(v-for="diretor in diretores" :key="diretor.id" :value="diretor.id" :label="diretor.nome")
             el-row.spacing
               el-button.custom-button(type="primary", @click="salvarFilme")
                 span Salvar Filme
                   i.el-icon-check
-      .container-tabela
-        h2 Tabela de Filmes
-          el-row
-            el-col
-              el-table.custom-table(:data="tableData" emptyText='Não existem filmes cadastrados!')
-                el-table-column(fixed prop="id" label="Id" width="100")
-                el-table-column(fixed prop="filme" label="Filme" width="300")
-                el-table-column(fixed prop="genero" label="Gênero" width="100")
-                el-table-column(fixed prop="diretor" label="Diretor" width="250")
-                el-table-column(fixed label="Ações" width="150")
-                template(slot-scope="scope")
-                  el-button(@click="atualizarFilme(tableData[scope.$index])" type="text").custom-button2 Editar
-                  el-button(@click="removerFilme(tableData[scope.$index])" type="text").custom-button2 Excluir
-      .container-tabela
-        el-form
-          el-row
-            el-col(:span = "24")
-              h2 Adicionar Diretor ao Filme
-            el-row
-              el-col.offset(:xs= "24" :md = "12")
-                h3 ID do filme
-                 span.custom-span  *
-                el-input.custom-input(placeholder="ID do filme", v-model="filme.nome", clearable)
-                h3 ID do diretor
-                 span.custom-span  *
-                el-input.custom-input(placeholder="ID do diretor", v-model="filme.nome", clearable)
-
-          
-
+    .container-tabela
+      h2 Tabela de Filmes
+        el-row
+          el-table(:data="filmes" empty-text='Não existem filmes cadastrados!')
+            el-table-column(prop="id" label="Id" width="100")
+            el-table-column(prop="nome" label="Filme" width="300")
+            el-table-column(prop="genero" label="Gênero" width="100")
+            el-table-column(prop="diretor.nome" label="Diretor" width="150")
+            el-table-column(label="Ações" width="150")
+              template(slot-scope="scope")
+                el-button(@click="atualizarFilme(filmes[scope.$index])" type="text").custom-button2 Editar
+                el-button(@click="removerFilme(filmes[scope.$index])" type="text").custom-button2 Excluir
 </template>
 
 <script>
+
 import Filme from "../services/filmeService";
+import Diretor from "../services/diretorService";
+
 
 export default {
     name: 'CadastroFilme',
     data() {
       return {
         filme: {
-          nomeFilme: '',
-          generoFilme: '',
-          lancamento: '',
-          //diretor: ''
+          id: "",
+          nome: "",
+          genero: "",
+          lancamento: "",
+          diretor: {
+            id: ""
+          }
         },
-        tabledata: []
+        filmes: [],
+        diretores: []
       };
     },
     methods: {
@@ -86,10 +79,10 @@ export default {
         }
       },
       listarFilmes() {
-        Filme.retornarFilme().then((resposta) => {
-          this.tabledata = resposta.data;
-        });
-      },
+      Filme.retornarFilmes().then((resposta => {
+        this.filmes = resposta.data
+      }))
+    },
       atualizarFilme(filme) {
         this.filme = filme
       },
@@ -98,10 +91,16 @@ export default {
           this.resposta = resposta;
           this.listarFilmes();
         });
+      },
+      listarDiretores() {
+        Diretor.retornarDiretores().then((resposta) => {
+          this.diretores = resposta.data
+        })
       }
     },
     mounted() {
-      this.listarFilmes();
+      this.listarFilmes(),
+      this.listarDiretores()
     }
 }
 </script>
