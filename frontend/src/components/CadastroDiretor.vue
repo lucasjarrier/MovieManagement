@@ -8,10 +8,10 @@ div
           el-form.custom-form
             el-row
               h3 Nome do diretor:
-              el-input.custom-input(placeholder="Fulano...", v-model="nomeDiretor", clearable)
+              el-input.custom-input(placeholder="Fulano...", v-model="diretor.nome", clearable)
             el-row
               h3 Sobrenome do diretor:
-              el-input.custom-input(placeholder="...da Silva", v-model="sobrenomeDiretor", clearable)
+              el-input.custom-input(placeholder="...da Silva", v-model="diretor.sobrenome", clearable)
             el-row.spacing
               el-button.custom-button(type="round", @click="salvarDiretor")
                 span Salvar Diretor
@@ -37,8 +37,8 @@ export default {
     data() {
       return {
         diretor: {
-          nomeDiretor: '',
-          sobrenomeDiretor: ''
+          nome: '',
+          sobrenome: ''
         },
         tableData: []        
       };
