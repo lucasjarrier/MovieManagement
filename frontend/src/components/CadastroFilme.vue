@@ -8,16 +8,16 @@ div
           el-form
             el-row
               h3 Nome do filme:
-              el-input(placeholder="Digite o nome do filme" v-model="nomeFilme").custom-input()
+              el-input(placeholder="Digite o nome do filme" v-model="filme.nome", clearable).custom-input()
             el-row
               h3 Gênero do filme:
-              el-select(placeholder="Selecione o gênero do filme" v-model="generoFilme")
+              el-select(placeholder="Selecione o gênero do filme" v-model="filme.genero", clearable)
                 el-option(value='terror' label="Terror")
                 el-option(value='drama' label="Drama")
                 el-option(value='fantasia' label="Fantasia")
             el-row
               h3 Data de lançamento:
-              el-date-picker(placeholder="Selecione uma data" v-model="lancamento").custom-input()
+              el-date-picker(placeholder="Selecione uma data" v-model="filme.lancamento", clearable).custom-input()
             el-row.spacing
               el-button.custom-button(type="primary", @click="salvarFilme")
                 span Salvar Filme
@@ -44,10 +44,10 @@ div
               el-col.offset(:xs= "24" :md = "12")
                 h3 ID do filme
                  span.custom-span  *
-                el-input.custom-input(placeholder="ID do filme", v-model="filme.nome", clearable)
+                el-input.custom-input(placeholder="ID do filme", v-model="filme.id", clearable)
                 h3 ID do diretor
                  span.custom-span  *
-                el-input.custom-input(placeholder="ID do diretor", v-model="filme.nome", clearable)
+                el-input.custom-input(placeholder="ID do diretor", v-model="filme.diretor", clearable)
 
           
 
@@ -61,8 +61,8 @@ export default {
     data() {
       return {
         filme: {
-          nomeFilme: '',
-          generoFilme: '',
+          nome: '',
+          genero: '',
           lancamento: '',
           //diretor: ''
         },
