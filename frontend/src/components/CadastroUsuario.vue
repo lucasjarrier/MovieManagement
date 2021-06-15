@@ -40,7 +40,7 @@ div
       .container-tabela
         h2 Tabela de Usuários
         el-row
-          el-table(:data="tableData" empty-text='Não existem usuários cadastrados!')
+          el-table(:data="usuarios" empty-text='Não existem usuários cadastrados!')
             el-table-column( prop="id" label="Id" width="80")
             el-table-column( prop="nome" label="Nome" width="120")
             el-table-column( prop="sobrenome" label="Sobrenome" width="250")
@@ -50,9 +50,9 @@ div
             el-table-column( prop="filmes" label="Filmes" width="200")
             el-table-column( label="Ações" width="300")
               template(slot-scope="scope")
-                el-button(@click="atualizarUsuario(tableData[scope.$index])" type="text").custom-button2 Editar
-                el-button(@click="removerUsuario(tableData[scope.$index])" type="text").custom-button2 Excluir
-                el-button(v-on:click="manterUsuario(tableData[scope.$index])" @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
+                el-button(@click="atualizarUsuario(usuarios[scope.$index])" type="text").custom-button2 Editar
+                el-button(@click="removerUsuario(usuarios[scope.$index])" type="text").custom-button2 Excluir
+                el-button(v-on:click="manterUsuario(usuarios[scope.$index])" @click="dialogTableVisible = true" type="text").custom-button2 Adicionar Filme
   el-dialog(:visible.sync="dialogTableVisible" width="40%" close-on-press-escape)
     h3 Escolha um filme
     el-row
@@ -61,8 +61,6 @@ div
           el-option(v-for="filme in filmes" :key="filme.id" :value="filme.id" :label="filme.nome")
       el-col.offset
         el-button.custom-button2(@click="salvarFilme(id_filme)" type="text") Adicionar Filme
-        
-
 </template>
 
 <script>
@@ -81,7 +79,7 @@ export default {
         dataNascimento: "",
         email: ""
       },
-      tableData: [],
+      usuarios: [],
       filmes: [],
       id_filme: "",
       id_usuario: "",
@@ -106,7 +104,7 @@ export default {
     },
     listarUsuarios() {
       Usuario.retornarUsuarios().then((resposta) => {
-        this.tableData = resposta.data;
+        this.usuarios = resposta.data;
       });
     },
     atualizarUsuario(usuario) {
