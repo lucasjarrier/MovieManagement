@@ -46,4 +46,9 @@ public class UsuarioController {
         service.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
+
+    @PostMapping("{id_usuario}/{id_filme}")
+    public void adicionarFilme(@PathVariable(value = "id_usuario") Long idUsuario, @PathVariable(value = "id_filme") Long idFilme) {
+        service.addFilme(idUsuario,idFilme);
+    }
 }

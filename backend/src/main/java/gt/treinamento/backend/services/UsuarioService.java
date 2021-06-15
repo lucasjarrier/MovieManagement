@@ -2,6 +2,7 @@ package gt.treinamento.backend.services;
 
 import gt.treinamento.backend.DTO.UsuarioAtualizacoesDTO;
 import gt.treinamento.backend.models.Usuario;
+import gt.treinamento.backend.repositories.FilmeRepository;
 import gt.treinamento.backend.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,12 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final FilmeRepository filmeRepository;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, FilmeRepository filmeRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.filmeRepository = filmeRepository;
     }
 
     public Usuario save(@Valid Usuario usuario) {
@@ -60,5 +63,11 @@ public class UsuarioService {
 
     public Usuario salvar(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    public void addFilme(Long idUsuario, Long idFilme) {
+        Usuario usuario = usuarioRepository.getById(idUsuario);
+        usuario.getFilmes().add(filmeRepository.getById(idFilme));
+        usuarioRepository.save(usuario);
     }
 }
