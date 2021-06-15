@@ -4,7 +4,7 @@ export default {
     salvarFilme: (filme) => {
         return http().post("/filme", {...filme});
     },
-    retornarFilme: () => {
+    retornarFilmes: () => {
         return http().get("/filmes");
     },
     atualizarFilme: (filme) => {

@@ -21,9 +21,9 @@ div
         el-row
           el-col
             el-table.custom-table(:data="tableData" empty-text='Não existem diretores cadastrados!')
-              el-table-column(fidex prop="id" label="Id" width="100")
-              el-table-column(fidex prop="nome" label="Nome" width="120")
-              el-table-column(fidex prop="sobrenome" label="Sobrenome" width="100")
+              el-table-column(prop="id" label="Id" width="100")
+              el-table-column(prop="nome" label="Nome" width="120")
+              el-table-column(prop="sobrenome" label="Sobrenome" width="100")
                 template(slot-scope="scope")
                   el-button(@click="atualizarDiretor(tableData[scope.$index])" type="text").custom-button2 Editar
                   el-button(@click="removerDiretor(tableData[scope.$index])" type="text").custom-button2 Excluir
