@@ -39,8 +39,8 @@ export default {
       return {
         diretor: {
           id: "",
-          nome: '',
-          sobrenome: ''
+          nome: "",
+          sobrenome: ""
         },
         diretores: []        
       };
@@ -54,10 +54,10 @@ export default {
             this.listarDiretores();
           });  
         } else {
-          Diretor.atualizarDiretor(this.diretor).then((resposta) => {
-            alert("Diretor atualizado!");
-            this.resposta = resposta;
-            this.listarDiretores();
+            Diretor.atualizarDiretor(this.diretor).then((resposta) => {
+              alert("Diretor atualizado!");
+              this.resposta = resposta;
+              this.listarDiretores();
           });
         }
       },
