@@ -18,6 +18,11 @@ div
             el-row
               h3 Data de lançamento:
               el-date-picker(placeholder="Selecione uma data" v-model="filme.lancamento", clearable).custom-input()
+            el-row
+              h3 Diretor:
+              el-input(placeholder="Digite o nome do diretor" v-model="filme.nomeDiretor", clearable).custom-input()
+            el-row.spacing
+              el-input(placeholder="Digite o sobrenome do diretor" v-model="filme.sobrenomeDiretor", clearable).custom-input()
             el-row.spacing
               el-button.custom-button(type="primary", @click="salvarFilme")
                 span Salvar Filme
@@ -35,19 +40,6 @@ div
                 template(slot-scope="scope")
                   el-button(@click="atualizarFilme(tableData[scope.$index])" type="text").custom-button2 Editar
                   el-button(@click="removerFilme(tableData[scope.$index])" type="text").custom-button2 Excluir
-      .container-tabela
-        el-form
-          el-row
-            el-col(:span = "24")
-              h2 Adicionar Diretor ao Filme
-            el-row
-              el-col.offset(:xs= "24" :md = "12")
-                h3 ID do filme
-                 span.custom-span  *
-                el-input.custom-input(placeholder="ID do filme", v-model="filme.id", clearable)
-                h3 ID do diretor
-                 span.custom-span  *
-                el-input.custom-input(placeholder="ID do diretor", v-model="filme.diretor", clearable)
 
           
 
@@ -64,7 +56,8 @@ export default {
           nome: '',
           genero: '',
           lancamento: '',
-          //diretor: ''
+          nomeDiretor: '',
+          sobrenomeDiretor: ''
         },
         tabledata: []
       };
